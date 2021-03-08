@@ -1,8 +1,8 @@
 # vagrlrn
 
 1. Создаём 2 папки, например VagrantServ и VagrantCl
-2. Кладём в них файлы VagrantServек и VagrantClient соответственно
-3. Переименовываем каждый файл в Vagrant
+2. Кладём в них файлы VagrantServеr и VagrantClient соответственно
+3. Переименовываем каждый файл в Vagrantfile
 4. Заходим в каждую папку через Командную строку
 5. vagrant up
 6. После успешного запуска - vagrant ssh
