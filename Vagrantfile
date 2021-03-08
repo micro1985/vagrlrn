@@ -2,4 +2,5 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos/7" 
   config.vm.hostname = "server"
   config.vm.network :private_network, ip: "172.16.123.10"
+  config.vm.provision "shell", path: "script1.sh"
 end
