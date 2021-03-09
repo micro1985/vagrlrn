@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+  config.vm.define :client do |cl_config|
+  cl_config.vm.box = "centos/7" 
+  cl_config.vm.hostname = "client"
+  cl_config.vm.network :private_network, ip: "172.16.123.20"
+  cl_config.vm.provision "shell", path: "script2.sh"
+  cl_config.vm.provision "shell", inline: "sudo sed -i 's/\r//g' /vagrant/script2.sh"
+  end
+
+  config.vm.define :server do |serv_config|
+  serv_config.vm.box = "centos/7" 
+  serv_config.vm.hostname = "server"
+  serv_config.vm.network :private_network, ip: "172.16.123.10"
+  serv_config.vm.provision "shell", path: "script1.sh"
+  serv_config.vm.provision "shell", inline: "sudo sed -i 's/\r//g' /vagrant/script1.sh"
+  end
+ end
