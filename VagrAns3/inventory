@@ -1,5 +1,8 @@
 [webserver]
 nginxserv ansible_host=192.168.40.20 ansible_ssh_user=vagrant ansible_ssh_private_key_file=/home/xenn/.vagrant.d/insecure_private_key ansible_host_key_checking=false ansible_ssh_args='-o UserKnownHostsFile=/dev/null'
 
+[dbserver]
+mysqlserv ansible_host=192.168.40.22 ansible_ssh_user=vagrant ansible_ssh_private_key_file=/home/xenn/.vagrant.d/insecure_private_key ansible_host_key_checking=false ansible_ssh_args='-o UserKnownHostsFile=/dev/null'
+
 [all:vars]
 ansible_python_interpreter=/usr/bin/python3
