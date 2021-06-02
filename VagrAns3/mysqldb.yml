@@ -13,11 +13,8 @@
   - name: Install dependencies
     apt: name={{ item }} state=present
     loop:
-#    - php
-#    - libapache2-mod-php
     - mysql-server
     - mysql-client
-#    - php-mysql
     - python3-mysqldb
     - python3-dev
     - python-pip
@@ -49,6 +46,14 @@
     - "{{ ansible_hostname }}"
     - 127.0.0.1
     - localhost
+    - "%"
+    notify: Restart MySQL
+
+  - name: Change conf file for remote connection
+    replace:
+      dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+      regexp: "bind-address"
+      replace: "#bind-address"
     notify: Restart MySQL
 
   - name: Create Database
@@ -58,8 +63,14 @@
     mysql_user:
       name: gouser
       password: 123456
+      host: "{{ item }}"
       priv: 'godb.*:ALL,GRANT'
       state: present
+    with_items:
+    - "{{ ansible_hostname  }}"
+    - 127.0.0.1
+    - localhost
+    - "%"
 
   handlers:
   - name: Restart MySQL
