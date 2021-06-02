@@ -11,7 +11,9 @@
     apt: update_cache=yes
 
   - name: Install dependencies
-    apt: name={{ item }} state=present
+    apt: 
+      name: "{{ item }}"
+      state: present
     loop:
     - mysql-server
     - mysql-client
@@ -24,7 +26,10 @@
     shell: pip install MySQL-python
 
   - name: Start and Enable MySQL
-    service: name=mysql state=started enabled=yes
+    service: 
+      name: mysql 
+      state: started 
+      enabled: yes
 
   - name: Create'/root/.my.cnf'
     template:
@@ -57,7 +62,9 @@
     notify: Restart MySQL
 
   - name: Create Database
-    mysql_db: name=godb state=present
+    mysql_db:
+      name: godb 
+      state: present
 
   - name: Create DB User
     mysql_user:
@@ -74,4 +81,6 @@
 
   handlers:
   - name: Restart MySQL
-    service: name=mysql state=restarted
+    service:
+      name: mysql
+      state: restarted
